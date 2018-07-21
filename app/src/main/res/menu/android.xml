@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <item
-        android:id="@+id/action_favorite"
+    <item android:id="@+id/action_groups"
         android:icon="@drawable/ic_add_box_black_24dp"
         android:title="@string/action_groups"
         app:showAsAction="never"/>
