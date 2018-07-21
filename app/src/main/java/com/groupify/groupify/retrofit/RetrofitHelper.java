@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 
 import com.groupify.groupify.R;
 import com.groupify.groupify.dto.AlbumList;
+import com.groupify.groupify.dto.UserResponse;
 
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -26,6 +27,12 @@ public final class RetrofitHelper {
 
 	public static void getAlbums(Context context, Callback<AlbumList> callback) {
 		groupifyService.getAlbums(String.format("Bearer %s",
+				PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.spotify_token_pref), ""))).
+				enqueue(callback);
+	}
+
+	public static void getUserInformation(Context context, Callback<UserResponse> callback) {
+		groupifyService.getUserInfo(String.format("Bearer %s",
 				PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.spotify_token_pref), ""))).
 				enqueue(callback);
 	}

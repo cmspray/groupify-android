@@ -36,11 +36,11 @@ class SplashScreenActivity : AppCompatActivity() {
         }
     }
 
-    private fun goHome() = startActivity(Intent(this, HomeActivity::class.java))
+    private fun goHome() = startActivity(Intent(this, HomeActivity::class.java)).apply { finish() }
 
     private fun requestLogin() = AuthenticationClient.openLoginActivity(this, REQUEST_CODE,
             AuthenticationRequest.Builder(getString(R.string.client_id), AuthenticationResponse.Type.TOKEN, buildUri()).apply {
-                setScopes(arrayOf("streaming", "user-library-read"))
+                setScopes(arrayOf("streaming", "user-library-read", "user-read-email", "user-read-private"))
             }.build())
 
     private fun buildUri() = Uri.Builder().scheme(getString(R.string.groupify_on_auth_host)).path(getString(R.string.groupify_on_auth_path)).build().toString()
