@@ -1,6 +1,7 @@
 package com.groupify.groupify.retrofit;
 
 import com.groupify.groupify.dto.AlbumList;
+import com.groupify.groupify.dto.UserResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -9,6 +10,10 @@ import retrofit2.http.Query;
 
 public interface GroupifyService {
 
+	@GET("user/me")
+	Call<UserResponse> getUserInfo(@Header("Authorization") String authToken);
+
+	//ALBUMS
 	@GET("library/albums")
 	Call<AlbumList> getAlbums(@Header("Authorization") String authToken);
 
