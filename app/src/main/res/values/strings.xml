@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Groupify</string>
-    <string name="com_spotify_sdk_redirect_scheme">yourscheme</string>
-    <string name="com_spotify_sdk_redirect_host">yourhost</string>
     <string name="client_id">client-id</string>
     <string name="groupify_on_auth_host">groupify</string>
-    <string name="groupify_on_auth_path">onauth</string>
+    <string name="groupify_on_auth_path">onAuth</string>
     <string name="spotify_token_pref">SPOTIFY_TOKEN</string>
 </resources>
