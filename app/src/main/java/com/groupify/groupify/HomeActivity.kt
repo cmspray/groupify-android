@@ -3,9 +3,6 @@ package com.groupify.groupify
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
-
-
 
 class HomeActivity : AppCompatActivity() {
 

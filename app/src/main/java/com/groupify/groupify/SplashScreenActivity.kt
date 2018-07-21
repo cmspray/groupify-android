@@ -40,7 +40,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun requestLogin() = AuthenticationClient.openLoginActivity(this, REQUEST_CODE,
             AuthenticationRequest.Builder(getString(R.string.client_id), AuthenticationResponse.Type.TOKEN, buildUri()).apply {
-                setScopes(arrayOf("streaming"))
+                setScopes(arrayOf("streaming", "user-library-read"))
             }.build())
 
     private fun buildUri() = Uri.Builder().scheme(getString(R.string.groupify_on_auth_host)).path(getString(R.string.groupify_on_auth_path)).build().toString()
