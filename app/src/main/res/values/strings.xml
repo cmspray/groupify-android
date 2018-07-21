@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Groupify</string>
+    <string name="com_spotify_sdk_redirect_scheme">yourscheme</string>
+    <string name="com_spotify_sdk_redirect_host">yourhost</string>
 </resources>
