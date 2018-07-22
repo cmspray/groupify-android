@@ -30,12 +30,12 @@ public final class RetrofitHelper {
 	}
 
 	public static void getAlbums(Context context, Callback<AlbumList> callback) {
-		groupifyService.getAlbums(PreferenceHelper.Companion.getAuthToken(context)).
+		groupifyService.getAlbums(PreferenceHelper.Companion.getAuth(context)).
 				enqueue(callback);
 	}
 
 	public static void getUserInformation(Context context, Callback<UserResponse> callback) {
-		groupifyService.getUserInfo(PreferenceHelper.Companion.getAuthToken(context)).
+		groupifyService.getUserInfo(PreferenceHelper.Companion.getAuth(context)).
 				enqueue(callback);
 	}
 
@@ -48,7 +48,11 @@ public final class RetrofitHelper {
 				groupifyUser.getSpotifyId()).enqueue(postUserResponse);
 	}
 
+	public static void addGroup(Context context, String groupName) {
+		groupifyService.createGroup(groupName, PreferenceHelper.Companion.getUserId(context));
+	}
+
 	public static void getGroups(Context context, Callback<AllGroupsResponse> groups) {
-		groupifyService.getAllGroups().enqueue(groups);
+		groupifyService.getGroupsForUser(PreferenceHelper.Companion.getUserId(context)).enqueue(groups);
 	}
 }

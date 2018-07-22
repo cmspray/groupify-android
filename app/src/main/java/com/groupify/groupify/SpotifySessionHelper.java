@@ -47,6 +47,7 @@ public class SpotifySessionHelper {
 		if (requestCode == SpotifySessionHelper.REQUEST_CODE) {
 			AuthenticationResponse response = AuthenticationClient.getResponse(resultCode, data);
 			if (response.getType() == AuthenticationResponse.Type.TOKEN) {
+				Log.e("Token", response.getAccessToken());
 				PreferenceManager.getDefaultSharedPreferences(context).edit().putString(context.getString(R.string.spotify_token_pref), response.getAccessToken()).apply();
 				RetrofitHelper.getUserInformation(context, new UserInfoCallback(context));
 				loginFinishedCallback.onFinished();
@@ -72,6 +73,7 @@ public class SpotifySessionHelper {
 		public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
 			GroupifyUser groupifyUser = new GroupifyUser(response.body().getUser());
 			RetrofitHelper.postUser(groupifyUser, userPostCallback);
+			Log.e("User ID", groupifyUser.getSpotifyId());
 			PreferenceHelper.Companion.saveUserId(context, groupifyUser.getSpotifyId());
 		}
 

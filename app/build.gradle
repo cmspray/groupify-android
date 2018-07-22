@@ -37,4 +37,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.android.support:recyclerview-v7:27.0.2'
+    implementation 'com.android.support:design:27.1.1'
 }
