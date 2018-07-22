@@ -104,7 +104,9 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
         user = response.body().getUser();
         displayName.setText(user.getDisplayName());
-        email.setText(user.getEmail());
+        if(user.getEmail() != null) {
+            email.setText(user.getEmail());
+        }
         if(user.getFirstName() != null) {
             firstName.setText(user.getFirstName());
         }
