@@ -19,8 +19,6 @@ class GroupListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         (holder as GroupViewHolder).apply {
             if (itemViewType == TYPE_GROUP) {
                 nameView.text = groups!![holder.adapterPosition].name
-            } else {
-                nameView.text = "You don't have any groups, loser"
             }
         }
     }
@@ -30,7 +28,7 @@ class GroupListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             GroupViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.group_list_item_view, parent, false))
         }
         else -> {
-            GroupViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.group_list_item_view, parent, false))
+            GroupViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.group_list_empty_item_view, parent, false))
         }
     }
 
