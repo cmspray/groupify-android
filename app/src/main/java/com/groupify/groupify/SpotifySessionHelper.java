@@ -38,19 +38,6 @@ public class SpotifySessionHelper {
 		}
 	};
 
-	private static final Callback<UserResponse> userInfoCallback = new Callback<UserResponse>() {
-		@Override
-		public void onResponse(@NonNull Call<UserResponse> all, @NonNull Response<UserResponse> response) {
-			GroupifyUser groupifyUser = new GroupifyUser(response.body().getUser());
-			RetrofitHelper.postUser(groupifyUser, userPostCallback);
-		}
-
-		@Override
-		public void onFailure(Call<UserResponse> call, Throwable t) {
-
-		}
-	};
-
 	public static void spotifyLogin(Activity activity) {
 		AuthenticationRequest request = new AuthenticationRequest.Builder(activity.getString(R.string.client_id), AuthenticationResponse.Type.TOKEN, buildUri(activity)).setScopes(scopes).build();
 		AuthenticationClient.openLoginActivity(activity, REQUEST_CODE, request);
@@ -61,7 +48,7 @@ public class SpotifySessionHelper {
 			AuthenticationResponse response = AuthenticationClient.getResponse(resultCode, data);
 			if (response.getType() == AuthenticationResponse.Type.TOKEN) {
 				PreferenceManager.getDefaultSharedPreferences(context).edit().putString(context.getString(R.string.spotify_token_pref), response.getAccessToken()).apply();
-				RetrofitHelper.getUserInformation(context, userInfoCallback);
+				RetrofitHelper.getUserInformation(context, new UserInfoCallback(context));
 				loginFinishedCallback.onFinished();
 			}
 			return true;
@@ -71,6 +58,27 @@ public class SpotifySessionHelper {
 
 	private static String buildUri(Context context) {
 		return new Uri.Builder().scheme(context.getString(R.string.groupify_on_auth_host)).path(context.getString(R.string.groupify_on_auth_path)).build().toString();
+	}
+
+	private static class UserInfoCallback implements Callback<UserResponse> {
+
+		private Context context;
+
+		public UserInfoCallback(Context context) {
+			this.context = context;
+		}
+
+		@Override
+		public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
+			GroupifyUser groupifyUser = new GroupifyUser(response.body().getUser());
+			RetrofitHelper.postUser(groupifyUser, userPostCallback);
+			PreferenceHelper.Companion.saveUserId(context, groupifyUser.getSpotifyId());
+		}
+
+		@Override
+		public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
+
+		}
 	}
 
 	public interface LoginFinishedCallback {
