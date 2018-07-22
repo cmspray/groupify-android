@@ -11,8 +11,8 @@ import com.spotify.sdk.android.player.SpotifyPlayer;
 
 public class SpotifyHelper {
 
-	private static Config playerConfig;
-	private static SpotifyPlayer player;
+	public static Config playerConfig;
+	public static SpotifyPlayer player;
 
 	public void initConfig(Context context, final ConnectionStateCallback connectionCallback, final Player.NotificationCallback notificationCallback) {
 		if(null == player) {

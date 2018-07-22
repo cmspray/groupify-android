@@ -32,7 +32,7 @@ class GroupListAdapter(val groupClickCallback: GroupClickCallback, context: Cont
                 nameView.text = groups!![holder.adapterPosition].name
                 itemView.setOnClickListener {
                     val group = groups!![holder.adapterPosition]
-                    spotifyHelper.player.playUri(null, group.playlistId, 0, 0)
+                    SpotifyHelper.player.playUri(null, group.playlistId, 0, 0)
                 }
                 itemView.setOnLongClickListener {
                     val group = groups!![holder.adapterPosition]
