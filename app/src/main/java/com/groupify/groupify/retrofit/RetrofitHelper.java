@@ -12,6 +12,7 @@ import com.groupify.groupify.dto.CreateUserResponse;
 import com.groupify.groupify.dto.Group;
 import com.groupify.groupify.dto.GroupRequest;
 import com.groupify.groupify.dto.GroupifyUser;
+import com.groupify.groupify.dto.User;
 import com.groupify.groupify.dto.UserResponse;
 
 import okhttp3.ResponseBody;
@@ -47,14 +48,20 @@ public final class RetrofitHelper {
 		groupifyService.postUser(PreferenceHelper.Companion.getAuth(context), groupifyUser).enqueue(postUserResponse);
 	}
 
+	public static void getUser(Context context, Callback<UserResponse> postUserResponse) {
+		groupifyService.getUser(PreferenceHelper.Companion.getAuth(context), PreferenceHelper.Companion.getSpotifyUserId(context)).enqueue(postUserResponse);
+	}
+
 	public static void addGroup(Context context, String groupName) {
 		groupifyService.createGroup(PreferenceHelper.Companion.getAuth(context), new GroupRequest(groupName, PreferenceHelper.Companion.getSpotifyUserId(context), PreferenceHelper.Companion.getUserId(context))).enqueue(new Callback<ResponseBody>() {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+				Log.e("Test", "test");
 			}
 
 			@Override
 			public void onFailure(Call<ResponseBody> call, Throwable t) {
+				Log.e("Test", "test");
 			}
 		});
 	}

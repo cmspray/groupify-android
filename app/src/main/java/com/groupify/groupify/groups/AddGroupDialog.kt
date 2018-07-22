@@ -10,7 +10,7 @@ import com.groupify.groupify.retrofit.RetrofitHelper
 
 class AddGroupDialog : DialogFragment() {
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = AlertDialog.Builder(activity).setView(activity?.layoutInflater?.inflate(R.layout.add_group_dialog, null)).setPositiveButton(R.string.add, { dialog, id ->
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = AlertDialog.Builder(activity).setView(activity?.layoutInflater?.inflate(R.layout.add_group_dialog, null)).setPositiveButton(R.string.save, { dialog, id ->
         onAdd(this@AddGroupDialog.dialog.findViewById<EditText>(R.id.group_name_editable).text.toString())
     }).setNegativeButton(R.string.cancel, { dialog, which ->
         this@AddGroupDialog.dialog.cancel()

@@ -27,6 +27,9 @@ public class User {
 	@SerializedName("id")
 	@Expose
 	private String id;
+	@SerializedName("user_id")
+	@Expose
+	private int userId;
 	@SerializedName("images")
 	@Expose
 	private List<GroupifyImage> images = null;
@@ -128,4 +131,11 @@ public class User {
 		this.uri = uri;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 }

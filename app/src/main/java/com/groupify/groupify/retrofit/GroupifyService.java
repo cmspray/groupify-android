@@ -26,6 +26,9 @@ public interface GroupifyService {
 	@POST("user")
 	Call<CreateUserResponse> postUser(@Header("Authorization") String authToken, @Body GroupifyUser groupifyUser);
 
+	@GET("user/{spotifyId}")
+	Call<UserResponse> getUser(@Header("Authorization") String authToken, @Path("spotifyId") String spotifyId);
+
 	@GET("user/me")
 	Call<UserResponse> getUserInfo(@Header("Authorization") String authToken);
 

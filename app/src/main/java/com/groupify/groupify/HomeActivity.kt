@@ -65,7 +65,6 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
                 }
 
                 override fun onFailure(call: Call<Group>?, t: Throwable?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
 
             })
