@@ -47,18 +47,15 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
             }
 
 
-    override fun groupClicked(groupId: Int, playlistId: String, groupName: String) {
-        supportFragmentManager.beginTransaction().addToBackStack("detail").
-                replace(R.id.home_container, GroupDetailsFragment.newInstance(groupId, groupName, playlistId)).
-                commit()
-
+    override fun groupClicked(groupId: Int, groupName: String, playlistId: String) {
+        supportFragmentManager.beginTransaction().addToBackStack("detail").replace(R.id.home_container, GroupDetailsFragment.newInstance(groupId, groupName, playlistId)).commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle(R.string.group_details)
+        supportActionBar?.title = groupName
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if(supportFragmentManager.backStackEntryCount <= 1) {
+        if (supportFragmentManager.backStackEntryCount <= 1) {
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportActionBar?.setTitle(R.string.app_name)
         }
@@ -68,7 +65,7 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
         ft.replace(R.id.home_container, GroupsFragment()).commit()
     }
 
-    private fun goToSettings() = startActivity(Intent(this,SettingsActivity::class.java))
-    private fun goToProfile() = startActivity(Intent(this,ProfileActivity::class.java))
+    private fun goToSettings() = startActivity(Intent(this, SettingsActivity::class.java))
+    private fun goToProfile() = startActivity(Intent(this, ProfileActivity::class.java))
 
 }
