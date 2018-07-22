@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import com.groupify.groupify.PreferenceHelper;
 import com.groupify.groupify.R;
 import com.groupify.groupify.dto.AlbumList;
+import com.groupify.groupify.dto.AllGroupsResponse;
 import com.groupify.groupify.dto.GroupifyUser;
 import com.groupify.groupify.dto.UserResponse;
 
@@ -45,5 +46,9 @@ public final class RetrofitHelper {
 				groupifyUser.getSpotifyUrl(),
 				groupifyUser.getSpotifyUri(),
 				groupifyUser.getSpotifyId()).enqueue(postUserResponse);
+	}
+
+	public static void getGroups(Context context, Callback<AllGroupsResponse> groups) {
+		groupifyService.getAllGroups().enqueue(groups);
 	}
 }

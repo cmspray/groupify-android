@@ -2,6 +2,7 @@ package com.groupify.groupify.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.groupify.groupify.R;
 
 public class GroupifyUser {
 

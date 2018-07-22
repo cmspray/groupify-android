@@ -1,6 +1,8 @@
 package com.groupify.groupify.retrofit;
 
 import com.groupify.groupify.dto.AlbumList;
+import com.groupify.groupify.dto.AllGroupsResponse;
+import com.groupify.groupify.dto.Group;
 import com.groupify.groupify.dto.UserResponse;
 
 import okhttp3.ResponseBody;
@@ -10,6 +12,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface GroupifyService {
@@ -26,6 +29,20 @@ public interface GroupifyService {
 
 	@GET("user/me")
 	Call<UserResponse> getUserInfo(@Header("Authorization") String authToken);
+
+	//GROUPS
+	@GET("group")
+	Call<AllGroupsResponse> getAllGroups();
+
+	@GET("group/{id}")
+	Call<AllGroupsResponse> getGroupsForUser(@Path("id") String userId);
+
+	@GET("group")
+	Call<Group> getGroup();
+
+	@FormUrlEncoded
+	@POST("group")
+	Call<ResponseBody> createGroup(@Field("name") String groupName, @Field("user_id") String userId);
 
 	//ALBUMS
 	@GET("library/albums")
