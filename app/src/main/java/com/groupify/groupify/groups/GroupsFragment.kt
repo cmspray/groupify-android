@@ -13,7 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.groupify.groupify.HomeActivity
 import com.groupify.groupify.R
+import com.groupify.groupify.SpotifyHelper
 import com.groupify.groupify.dto.AllGroupsResponse
 import com.groupify.groupify.retrofit.RetrofitHelper
 import com.spotify.sdk.android.player.ConnectionStateCallback
@@ -36,6 +38,10 @@ class GroupsFragment : Fragment(), Callback<AllGroupsResponse> {
         }
 
         override fun onLoggedIn() {
+            if(HomeActivity.playListId != null) {
+                Log.e("Logged In", "Logged in")
+                SpotifyHelper.player?.playUri(null, HomeActivity.playListId, 0, 0)
+            }
         }
 
         override fun onConnectionMessage(p0: String?) {

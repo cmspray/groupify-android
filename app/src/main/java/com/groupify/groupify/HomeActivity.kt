@@ -103,6 +103,13 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
         })
     }
 
+    override fun playingId(playListId: String) {
+        HomeActivity.playListId = playListId
+    }
+
     private fun goToProfile() = startActivity(Intent(this, ProfileActivity::class.java))
 
+    companion object {
+        var playListId: String? = null
+    }
 }

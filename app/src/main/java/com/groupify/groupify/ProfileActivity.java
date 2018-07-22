@@ -81,7 +81,6 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
         RetrofitHelper.putUser(this, user, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-            Log.e("Blah blah","No way");
             }
 
             @Override

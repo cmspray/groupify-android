@@ -4,11 +4,14 @@ import android.app.PendingIntent.getActivity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.preference.PreferenceManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.groupify.groupify.PreferenceHelper
 import com.groupify.groupify.R
 import com.groupify.groupify.SpotifyHelper
 import com.groupify.groupify.dto.Group
@@ -32,7 +35,12 @@ class GroupListAdapter(val groupClickCallback: GroupClickCallback, context: Cont
                 nameView.text = groups!![holder.adapterPosition].name
                 itemView.setOnClickListener {
                     val group = groups!![holder.adapterPosition]
-                    SpotifyHelper.player.playUri(null, group.playlistId, 0, 0)
+                    if(SpotifyHelper.player.isLoggedIn) {
+                        SpotifyHelper.player.playUri(null, group.playlistId, 0, 0)
+                    } else {
+                        Log.e("Not Logged in", "Not logged in")
+                        groupClickCallback.playingId(group.playlistId)
+                    }
                 }
                 itemView.setOnLongClickListener {
                     val group = groups!![holder.adapterPosition]
@@ -75,5 +83,6 @@ class GroupListAdapter(val groupClickCallback: GroupClickCallback, context: Cont
 
     interface GroupClickCallback {
         fun groupClicked(groupId: Int, playlistId: String, groupName: String)
+        fun playingId(playListId: String)
     }
 }

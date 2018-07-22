@@ -27,36 +27,36 @@ public interface GroupifyService {
 
 	//USERS
 	@POST("user")
-	Call<CreateUserResponse> postUser(@Header("Authorization") String authToken, @Body GroupifyUser groupifyUser);
+	Call<CreateUserResponse> postUser(@Header("X-Spotify-ID") String spotifyId, @Header("Authorization") String authToken, @Body GroupifyUser groupifyUser);
 
 	@GET("user/{spotifyId}")
-	Call<UserResponse> getUser(@Header("Authorization") String authToken, @Path("spotifyId") String spotifyId);
+	Call<UserResponse> getUser(@Header("X-Spotify-ID") String spotifyIdHeader, @Header("Authorization") String authToken, @Path("spotifyId") String spotifyId);
 
 	@GET("user/me")
-	Call<UserResponse> 	getUserInfo(@Header("Authorization") String authToken);
+	Call<UserResponse> 	getUserInfo(@Header("X-Spotify-ID") String spotifyId, @Header("Authorization") String authToken);
 
 	@PUT("user/{id}")
-	Call<ResponseBody> putUser(@Header("Authorization") String authToken,@Path("id") int userId, @Body PutUserRequest groupifyUser);
+	Call<ResponseBody> putUser(@Header("X-Spotify-ID") String spotifyId, @Header("Authorization") String authToken,@Path("id") int userId, @Body PutUserRequest groupifyUser);
 
 	//GROUPS
 	@GET("group")
-	Call<AllGroupsResponse> getAllGroups(@Header("Authorization") String authToken);
+	Call<AllGroupsResponse> getAllGroups(@Header("X-Spotify-ID") String spotifyId, @Header("Authorization") String authToken);
 
 	@GET("group/{id}")
-	Call<Group> getGroupById(@Header("Authorization") String authToken, @Path("id") String groupId);
+	Call<Group> getGroupById(@Header("X-Spotify-ID") String spotifyId, @Header("Authorization") String authToken, @Path("id") String groupId);
 
 	@POST("group/{id}/member")
-	Call<ResponseBody> addUserToGroup(@Header("Authorization") String authToken, @Path("id") String groupId, @Body AddToGroupRequest addToGroupRequest);
+	Call<ResponseBody> addUserToGroup(@Header("X-Spotify-ID") String spotifyId, @Header("Authorization") String authToken, @Path("id") String groupId, @Body AddToGroupRequest addToGroupRequest);
 
 	@GET("group")
 	Call<Group> getGroup();
 
 	@POST("group")
-	Call<ResponseBody> createGroup(@Header("Authorization") String authToken, @Body GroupRequest groupRequest);
+	Call<ResponseBody> createGroup(@Header("X-Spotify-ID") String spotifyId, @Header("Authorization") String authToken, @Body GroupRequest groupRequest);
 
 	//ALBUMS
 	@GET("library/albums")
-	Call<AlbumList> getAlbums(@Header("Authorization") String authToken);
+	Call<AlbumList> getAlbums(@Header("X-Spotify-ID") String spotifyId, @Header("Authorization") String authToken);
 
 	@GET("library/albums")
 	Call<AlbumList> getAlbumsWithLimit(@Header("Authorization") String authToken, @Query("limit") int limit);
@@ -69,6 +69,6 @@ public interface GroupifyService {
 
 	//PLAYLISTS
 	@GET("playlist/{playlistId}/user/{userId}")
-	Call<ResponseBody> getPlaylistById(@Header("Authorization") String authToken, @Path("playlistId") String playlistId,  @Path("userId") String userId);
+	Call<ResponseBody> getPlaylistById(@Header("X-Spotify-ID") String spotifyId, @Header("Authorization") String authToken, @Path("playlistId") String playlistId,  @Path("userId") String userId);
 
 }
