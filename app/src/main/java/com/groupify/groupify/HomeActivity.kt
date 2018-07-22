@@ -1,8 +1,10 @@
 package com.groupify.groupify
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 
 class HomeActivity : AppCompatActivity() {
 
@@ -17,4 +19,18 @@ class HomeActivity : AppCompatActivity() {
         inflater.inflate(R.menu.android, menu)
         return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+            when (item.itemId) {
+                R.id.action_settings -> {
+                    goToSettings()
+                    true
+                }
+                else -> {
+                    super.onOptionsItemSelected(item)
+                }
+            }
+
+    private fun goToSettings() = startActivity(Intent(this,SettingsActivity::class.java))
+
 }
