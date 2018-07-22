@@ -63,9 +63,11 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
         User user = response.body().getUser();
         displayName.setText(user.getDisplayName());
         email.setText(user.getEmail());
-        final String imageUrl = user.getImages().get(0).getImageUrl();
+        if(!user.getImages().isEmpty()) {
+            final String imageUrl = user.getImages().get(0).getImageUrl();
 
-        new DownLoadImageTask(profileImage).execute(imageUrl);
+            new DownLoadImageTask(profileImage).execute(imageUrl);
+        }
     }
 
     @Override

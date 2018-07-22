@@ -67,4 +67,8 @@ public final class RetrofitHelper {
 	public static void getGroupById(Context context, int groupId, Callback<Group> callback) {
 		groupifyService.getGroupById(PreferenceHelper.Companion.getAuth(context), groupId).enqueue(callback);
 	}
+
+	public static void getPlaylist(Context context, String playlistId, Callback<ResponseBody> callback) {
+		groupifyService.getPlaylistById(PreferenceHelper.Companion.getAuth(context), playlistId, PreferenceHelper.Companion.getSpotifyUserId(context)).enqueue(callback);
+	}
 }

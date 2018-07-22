@@ -54,4 +54,8 @@ public interface GroupifyService {
 	@GET("library/albums")
 	Call<AlbumList> getAlbumsWithLimitAndOffset(@Header("Authorization") String authToken, @Query("limit") int limit, @Query("offset") int offset);
 
+	//PLAYLISTS
+	@GET("playlists/{playlistId}/user/{userId}")
+	Call<ResponseBody> getPlaylistById(@Header("Authorization") String authToken, @Path("playlistId") String playlistId,  @Path("userId") String userId);
+
 }
