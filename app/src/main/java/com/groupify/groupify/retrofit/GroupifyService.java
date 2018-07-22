@@ -7,6 +7,8 @@ import com.groupify.groupify.dto.CreateUserResponse;
 import com.groupify.groupify.dto.Group;
 import com.groupify.groupify.dto.GroupRequest;
 import com.groupify.groupify.dto.GroupifyUser;
+import com.groupify.groupify.dto.PutUserRequest;
+import com.groupify.groupify.dto.User;
 import com.groupify.groupify.dto.UserResponse;
 
 import okhttp3.ResponseBody;
@@ -17,6 +19,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -31,6 +34,9 @@ public interface GroupifyService {
 
 	@GET("user/me")
 	Call<UserResponse> getUserInfo(@Header("Authorization") String authToken);
+
+	@PUT("user/{id}")
+	Call<ResponseBody> putUser(@Header("Authorization") String authToken,@Path("id") int userId, @Body PutUserRequest groupifyUser);
 
 	//GROUPS
 	@GET("group")

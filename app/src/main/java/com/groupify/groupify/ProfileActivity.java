@@ -13,11 +13,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.groupify.groupify.dto.GroupifyImage;
+import com.groupify.groupify.dto.PutUserRequest;
 import com.groupify.groupify.dto.User;
 import com.groupify.groupify.dto.UserResponse;
 import com.groupify.groupify.retrofit.RetrofitHelper;
@@ -25,15 +29,21 @@ import com.groupify.groupify.retrofit.RetrofitHelper;
 import java.io.InputStream;
 import java.net.URL;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ProfileActivity extends AppCompatActivity implements Callback<UserResponse> {
 
     private TextView displayName;
     private TextView email;
+    private TextView firstName;
+    private TextView lastName;
+    private TextView phoneNumber;
     private ImageView profileImage;
+    private User user;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,8 +55,37 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
         displayName = findViewById(R.id.user_display_name);
         email = findViewById(R.id.user_email);
         profileImage = findViewById(R.id.user_profile_image);
+        firstName = findViewById(R.id.user_first_name);
+        lastName = findViewById(R.id.user_last_name);
+        phoneNumber = findViewById(R.id.user_phone);
 
-        RetrofitHelper.getUserInformation(this, this);
+        RetrofitHelper.getUser(this, this);
+        RetrofitHelper.getUserInformation(this,this);
+        final Button saveButton = findViewById(R.id.save_profile);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               saveProfile();
+            }
+        });
+    }
+
+    public void saveProfile() {
+        PutUserRequest user = new PutUserRequest();
+        user.setFirstName(firstName.getEditableText().toString());
+        user.setLastName(lastName.getEditableText().toString());
+        user.setPhoneNumber(phoneNumber.getEditableText().toString());
+
+        RetrofitHelper.putUser(this, user, new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            Log.e("Blah blah","No way");
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -60,9 +99,18 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
 
     @Override
     public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-        User user = response.body().getUser();
+        user = response.body().getUser();
         displayName.setText(user.getDisplayName());
         email.setText(user.getEmail());
+        if(user.getFirstName() != null) {
+            firstName.setText(user.getFirstName());
+        }
+        if(user.getLastName() != null) {
+            lastName.setText(user.getLastName());
+        }
+        if(user.getPhoneNumber() != null) {
+            phoneNumber.setText(user.getPhoneNumber());
+        }
         if(!user.getImages().isEmpty()) {
             final String imageUrl = user.getImages().get(0).getImageUrl();
 

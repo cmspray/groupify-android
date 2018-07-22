@@ -12,6 +12,15 @@ public class User {
 	@SerializedName("display_name")
 	@Expose
 	private String displayName;
+	@SerializedName("first_name")
+	@Expose
+	private String firstName;
+	@SerializedName("last_name")
+	@Expose
+	private String lastName;
+	@SerializedName("phone_number")
+	@Expose
+	private String phoneNumber;
 	@SerializedName("email")
 	@Expose
 	private String email;
@@ -58,6 +67,18 @@ public class User {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
+
+	public String getFirstName() { return firstName; }
+
+	public void setFirstName(String firstName) { this.firstName = firstName; }
+
+	public String getLastName() { return lastName; }
+
+	public void setLastName(String lastName) { this.lastName = lastName; }
+
+	public String getPhoneNumber() { return phoneNumber; }
+
+	public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 
 	public String getEmail() {
 		return email;

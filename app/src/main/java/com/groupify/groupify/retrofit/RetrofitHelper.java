@@ -12,6 +12,7 @@ import com.groupify.groupify.dto.CreateUserResponse;
 import com.groupify.groupify.dto.Group;
 import com.groupify.groupify.dto.GroupRequest;
 import com.groupify.groupify.dto.GroupifyUser;
+import com.groupify.groupify.dto.PutUserRequest;
 import com.groupify.groupify.dto.User;
 import com.groupify.groupify.dto.UserResponse;
 
@@ -50,6 +51,10 @@ public final class RetrofitHelper {
 
 	public static void getUser(Context context, Callback<UserResponse> postUserResponse) {
 		groupifyService.getUser(PreferenceHelper.Companion.getAuth(context), PreferenceHelper.Companion.getSpotifyUserId(context)).enqueue(postUserResponse);
+	}
+
+	public static void putUser(Context context, PutUserRequest groupifyUser, Callback<ResponseBody> postUserResponse) {
+		groupifyService.putUser(PreferenceHelper.Companion.getAuth(context),PreferenceHelper.Companion.getUserId(context), groupifyUser).enqueue(postUserResponse);
 	}
 
 	public static void addGroup(Context context, String groupName) {
