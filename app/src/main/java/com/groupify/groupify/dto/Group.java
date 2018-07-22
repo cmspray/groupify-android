@@ -22,7 +22,7 @@ public class Group {
 	private int userId;
 	@SerializedName("playlist_id")
 	@Expose
-	private int playlistId;
+	private String playlistId;
 
 	public int getId() {
 		return id;
@@ -64,11 +64,11 @@ public class Group {
 		this.userId = userId;
 	}
 
-	public int getPlaylistId() {
+	public String getPlaylistId() {
 		return playlistId;
 	}
 
-	public void setPlaylistId(int playlistId) {
+	public void setPlaylistId(String playlistId) {
 		this.playlistId = playlistId;
 	}
 }

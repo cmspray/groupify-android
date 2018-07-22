@@ -3,6 +3,7 @@
     package="com.groupify.groupify">
 
     <application
+        android:name=".GroupifyApplication"
         android:allowBackup="true"
         android:icon="@drawable/groupify_icon"
         android:label="@string/app_name"

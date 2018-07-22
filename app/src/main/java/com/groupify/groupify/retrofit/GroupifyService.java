@@ -2,8 +2,10 @@ package com.groupify.groupify.retrofit;
 
 import com.groupify.groupify.dto.AlbumList;
 import com.groupify.groupify.dto.AllGroupsResponse;
+import com.groupify.groupify.dto.CreateUserResponse;
 import com.groupify.groupify.dto.Group;
 import com.groupify.groupify.dto.GroupRequest;
+import com.groupify.groupify.dto.GroupifyUser;
 import com.groupify.groupify.dto.UserResponse;
 
 import okhttp3.ResponseBody;
@@ -20,19 +22,16 @@ import retrofit2.http.Query;
 public interface GroupifyService {
 
 	//USERS
-	@FormUrlEncoded
 	@POST("user")
-	Call<ResponseBody> postUser(@Field("username") String username,
-								@Field("displayName") String displayName,
-								@Field("email") String email,
-								@Field("spotifyUrl") String spotifyUrl,
-								@Field("spotifyUri") String spotifyUri,
-								@Field("spotifyId") String spotifyId);
+	Call<CreateUserResponse> postUser(@Header("Authorization") String authToken, @Body GroupifyUser groupifyUser);
 
 	@GET("user/me")
 	Call<UserResponse> getUserInfo(@Header("Authorization") String authToken);
 
 	//GROUPS
+	@GET("group")
+	Call<AllGroupsResponse> getAllGroups(@Header("Authorization") String authToken);
+
 	@GET("group/user/{id}")
 	Call<AllGroupsResponse> getGroupsForUser(@Path("id") String userId);
 
@@ -40,7 +39,7 @@ public interface GroupifyService {
 	Call<Group> getGroup();
 
 	@POST("group")
-	Call<ResponseBody> createGroup(@Body GroupRequest groupRequest);
+	Call<ResponseBody> createGroup(@Header("Authorization") String authToken, @Body GroupRequest groupRequest);
 
 	//ALBUMS
 	@GET("library/albums")

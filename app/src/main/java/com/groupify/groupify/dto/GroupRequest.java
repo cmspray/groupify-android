@@ -5,24 +5,28 @@ import com.google.gson.annotations.SerializedName;
 
 public class GroupRequest {
 
-	@SerializedName("spotify_user_id")
+	@SerializedName("spotify_id")
 	@Expose
-	private String id;
+	private String spotifyId;
 	@SerializedName("name")
 	@Expose
 	private String name;
+	@SerializedName("user_id")
+	@Expose
+	private int id;
 
-	public GroupRequest(String name, String id) {
-		this.id = id;
+	public GroupRequest(String name, String spotifyId, int id) {
+		this.spotifyId = spotifyId;
 		this.name = name;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getSpotifyId() {
+		return spotifyId;
+	}
+
+	public void setSpotifyId(String id) {
+		this.spotifyId = id;
 	}
 
 	public String getName() {
@@ -31,5 +35,13 @@ public class GroupRequest {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

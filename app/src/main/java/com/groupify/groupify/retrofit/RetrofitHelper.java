@@ -7,6 +7,7 @@ import android.util.Log;
 import com.groupify.groupify.PreferenceHelper;
 import com.groupify.groupify.dto.AlbumList;
 import com.groupify.groupify.dto.AllGroupsResponse;
+import com.groupify.groupify.dto.CreateUserResponse;
 import com.groupify.groupify.dto.GroupRequest;
 import com.groupify.groupify.dto.GroupifyUser;
 import com.groupify.groupify.dto.UserResponse;
@@ -37,21 +38,15 @@ public final class RetrofitHelper {
 	}
 
 	public static void getUserInformation(Context context, Callback<UserResponse> callback) {
-		groupifyService.getUserInfo(PreferenceHelper.Companion.getAuth(context)).
-				enqueue(callback);
+		groupifyService.getUserInfo(PreferenceHelper.Companion.getAuth(context)).	enqueue(callback);
 	}
 
-	public static void postUser(GroupifyUser groupifyUser, Callback<ResponseBody> postUserResponse) {
-		groupifyService.postUser(groupifyUser.getUsername(),
-				groupifyUser.getDisplayName(),
-				groupifyUser.getEmail(),
-				groupifyUser.getSpotifyUrl(),
-				groupifyUser.getSpotifyUri(),
-				groupifyUser.getSpotifyId()).enqueue(postUserResponse);
+	public static void postUser(Context context, GroupifyUser groupifyUser, Callback<CreateUserResponse> postUserResponse) {
+		groupifyService.postUser(PreferenceHelper.Companion.getAuth(context), groupifyUser).enqueue(postUserResponse);
 	}
 
 	public static void addGroup(Context context, String groupName) {
-		groupifyService.createGroup(new GroupRequest(groupName, PreferenceHelper.Companion.getSpotifyUserId(context))).enqueue(new Callback<ResponseBody>() {
+		groupifyService.createGroup(PreferenceHelper.Companion.getAuth(context), new GroupRequest(groupName, PreferenceHelper.Companion.getSpotifyUserId(context), PreferenceHelper.Companion.getUserId(context))).enqueue(new Callback<ResponseBody>() {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 				Log.e("Add Group Response", "" + response.isSuccessful());
@@ -65,6 +60,6 @@ public final class RetrofitHelper {
 	}
 
 	public static void getGroups(Context context, Callback<AllGroupsResponse> groups) {
-		groupifyService.getGroupsForUser(PreferenceHelper.Companion.getSpotifyUserId(context)).enqueue(groups);
+		groupifyService.getAllGroups(PreferenceHelper.Companion.getAuth(context)).enqueue(groups);
 	}
 }
