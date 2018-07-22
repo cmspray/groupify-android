@@ -2,6 +2,7 @@ package com.groupify.groupify
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.media.Image
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
@@ -22,6 +23,8 @@ import com.groupify.groupify.groups.GroupListAdapter
 import com.groupify.groupify.groups.GroupsFragment
 import com.groupify.groupify.retrofit.RetrofitHelper
 import com.groupify.groupify.retrofit.RetrofitHelper.addGroup
+import com.spotify.sdk.android.player.Error
+import com.spotify.sdk.android.player.Player
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,6 +54,7 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
         }
         findViewById<View>(R.id.action_profile).setOnClickListener { goToProfile() }
         showGroupList(supportFragmentManager.beginTransaction().addToBackStack("list"))
+        findViewById<View>(R.id.home).setOnClickListener { stopSong() }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -108,6 +112,21 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
     }
 
     private fun goToProfile() = startActivity(Intent(this, ProfileActivity::class.java))
+
+    private fun stopSong() {
+        if(HomeActivity.playListId != null) {
+            SpotifyHelper.player.pause(object : Player.OperationCallback {
+                override fun onSuccess() {
+                }
+
+                override fun onError(p0: Error?) {
+                }
+
+            })
+        } else {
+            HomeActivity.playListId = null
+        }
+    }
 
     companion object {
         var playListId: String? = null
