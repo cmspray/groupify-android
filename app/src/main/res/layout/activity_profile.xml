@@ -14,11 +14,45 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <!--Logout-->
+    <ImageView
+        android:id="@+id/user_profile_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:src="@drawable/groupify_icon" />
     <TextView
+        android:id="@+id/user_display_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is the profile page"
         android:layout_centerInParent="true"
+        <!--android:text="Nick"-->
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/user_profile_image"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/title_display_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Email:"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        <!--android:text="isillysquirrel@yahoo.com"-->
+        android:textSize="18dp"
+        android:textStyle="bold"
         />
 </RelativeLayout>
