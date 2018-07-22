@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import com.groupify.groupify.onboarding.OnBoardingActivity
 
 class SplashScreenActivity : AppCompatActivity(), SpotifySessionHelper.LoginFinishedCallback {
 
@@ -27,6 +28,12 @@ class SplashScreenActivity : AppCompatActivity(), SpotifySessionHelper.LoginFini
         }
     }
 
-    private fun goHome() = startActivity(Intent(this, HomeActivity::class.java)).apply { finish() }
+    private fun goHome() {
+        if(PreferenceHelper.hasSeenOnBoarding(this))
+            startActivity(Intent(this, HomeActivity::class.java))
+        else
+            startActivity(Intent(this, OnBoardingActivity::class.java))
+        finish()
+    }
 
 }
