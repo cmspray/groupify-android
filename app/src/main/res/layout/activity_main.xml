@@ -9,30 +9,28 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/header_pair_image"
-        />
+        android:src="@drawable/header_pair_image" />
+
     <ImageView
         android:id="@+id/home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/groupify_icon_white"
-        android:adjustViewBounds="true"
-        android:maxWidth="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        />
+        android:adjustViewBounds="true"
+        android:maxWidth="50dp"
+        android:src="@drawable/groupify_icon_white" />
 
     <ImageView
         android:id="@+id/action_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_person_outline_black_24dp"
-        android:adjustViewBounds="true"
-        android:maxWidth="50dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        />
+        android:adjustViewBounds="true"
+        android:maxWidth="50dp"
+        android:src="@drawable/ic_person_outline_black_24dp" />
 
     <FrameLayout
         android:id="@+id/home_container"

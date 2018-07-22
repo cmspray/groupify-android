@@ -11,6 +11,7 @@ import android.text.TextUtils.replace
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.groupify.groupify.dto.Group
@@ -46,6 +47,7 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
 
             })
         }
+        findViewById<View>(R.id.action_profile).setOnClickListener { goToProfile() }
         showGroupList(supportFragmentManager.beginTransaction().addToBackStack("list"))
     }
 
@@ -68,12 +70,6 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
 
             })
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.android, menu)
-        return true
     }
 
     override fun groupClicked(groupId: Int, groupName: String, playlistId: String) {
