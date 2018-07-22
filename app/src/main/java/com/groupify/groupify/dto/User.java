@@ -29,7 +29,7 @@ public class User {
 	private String id;
 	@SerializedName("images")
 	@Expose
-	private List<Object> images = null;
+	private List<GroupifyImage> images = null;
 	@SerializedName("product")
 	@Expose
 	private String product;
@@ -96,11 +96,11 @@ public class User {
 		this.id = id;
 	}
 
-	public List<Object> getImages() {
+	public List<GroupifyImage> getImages() {
 		return images;
 	}
 
-	public void setImages(List<Object> images) {
+	public void setImages(List<GroupifyImage> images) {
 		this.images = images;
 	}
 

@@ -4,10 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/idea"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="75dp"
+        android:src="@drawable/idea"
+        />
+
     <TextView
-        android:id="@+id/group_name"
+        android:id="@+id/group_empty_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nothing to See here... Join or create a group to get the party started!"/>
+        android:layout_below="@+id/idea"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="No Groupify Playlist Yet :("/>
+
+    <TextView
+        android:id="@+id/group_empty_suggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/group_empty_text"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="40dp"
+        android:gravity="center"
+        android:textColor="@android:color/darker_gray"
+        android:text="Here is a bright idea: why not reach out to some of your homies and get your groove on by creating a new playlist?"/>
 
 </RelativeLayout>

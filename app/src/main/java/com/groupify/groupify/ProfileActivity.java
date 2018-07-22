@@ -1,12 +1,15 @@
 package com.groupify.groupify;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.groupify.groupify.dto.GroupifyImage;
 import com.groupify.groupify.dto.User;
 import com.groupify.groupify.dto.UserResponse;
 import com.groupify.groupify.retrofit.RetrofitHelper;
@@ -19,7 +22,7 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
 
     private TextView displayName;
     private TextView email;
-    //todo add profile image
+    private ImageView profileImage;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         displayName = findViewById(R.id.user_display_name);
         email = findViewById(R.id.user_email);
+        profileImage = findViewById(R.id.user_profile_image);
 
         RetrofitHelper.getUserInformation(this, this);
     }
@@ -47,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
         User user = response.body().getUser();
         displayName.setText(user.getDisplayName());
         email.setText(user.getEmail());
+        profileImage.setImageURI(Uri.parse(user.getImages().get(0).getImageUrl()));//this doesn't work
     }
 
     @Override
