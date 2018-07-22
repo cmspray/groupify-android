@@ -36,7 +36,7 @@ class GroupListAdapter(val groupClickCallback: GroupClickCallback, context: Cont
                 itemView.setOnClickListener {
                     val group = groups!![holder.adapterPosition]
                     if(SpotifyHelper.player.isLoggedIn) {
-                        SpotifyHelper.player.playUri(null, group.playlistId, 0, 0)
+                        SpotifyHelper.player.playUri(null, "spotify:playlist:" + group.playlistId, 0, 0)
                     } else {
                         Log.e("Not Logged in", "Not logged in")
                         groupClickCallback.playingId(group.playlistId)

@@ -2,6 +2,7 @@ package com.groupify.groupify;
 
 import android.content.Context;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.spotify.sdk.android.player.Config;
 import com.spotify.sdk.android.player.ConnectionStateCallback;
@@ -25,14 +26,13 @@ public class SpotifyHelper {
 		player  = Spotify.getPlayer(playerConfig, this, new SpotifyPlayer.InitializationObserver() {
 			@Override
 			public void onInitialized(SpotifyPlayer spotifyPlayer) {
-				player.addConnectionStateCallback(connectionCallback);
-				player.addNotificationCallback(notificationCallback);
-				SpotifyHelper.player = player;
+				spotifyPlayer.addConnectionStateCallback(connectionCallback);
+				spotifyPlayer.addNotificationCallback(notificationCallback);
 			}
 
 			@Override
 			public void onError(Throwable throwable) {
-
+				Log.e("Couln't init", throwable.getMessage());
 			}
 		});
 	}

@@ -40,27 +40,32 @@ class GroupsFragment : Fragment(), Callback<AllGroupsResponse> {
         override fun onLoggedIn() {
             if(HomeActivity.playListId != null) {
                 Log.e("Logged In", "Logged in")
-                SpotifyHelper.player?.playUri(null, HomeActivity.playListId, 0, 0)
+                SpotifyHelper.player?.playUri(null, "spotify:playlist:" + HomeActivity.playListId, 0, 0)
             }
         }
 
         override fun onConnectionMessage(p0: String?) {
+
+            Log.e("ConnectMessage", p0 ?: "")
         }
 
         override fun onLoginFailed(p0: Error?) {
+            Log.e("Error", p0?.name ?: "Nothing")
         }
 
         override fun onTemporaryError() {
+            Log.e("Temp Erro", "what")
         }
-
     }
 
     val notificationCallback: Player.NotificationCallback = object : Player.NotificationCallback {
         override fun onPlaybackError(p0: Error?) {
+            Log.e("Error", p0?.name ?: "none")
 
         }
 
         override fun onPlaybackEvent(p0: PlayerEvent?) {
+            Log.e("Error", p0?.name ?: "none")
         }
 
     }

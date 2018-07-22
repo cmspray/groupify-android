@@ -27,7 +27,7 @@ public class SpotifySessionHelper {
 
 	public static final int REQUEST_CODE = 12415;
 
-	private static final String[] scopes = new String[]{"playlist-modify-public", "playlist-modify-private", "user-read-private", "user-read-birthdate", "user-read-email", "playlist-read-private", "user-library-read", "user-library-modify", "user-top-read", "playlist-read-collaborative", "user-follow-read", "user-follow-modify", "user-read-playback-state", "user-read-currently-playing", "user-modify-playback-state", "user-read-recently-played"};
+	private static final String[] scopes = new String[]{"streaming", "playlist-modify-public", "playlist-modify-private", "user-read-private", "user-read-birthdate", "user-read-email", "playlist-read-private", "user-library-read", "user-library-modify", "user-top-read", "playlist-read-collaborative", "user-follow-read", "user-follow-modify", "user-read-playback-state", "user-read-currently-playing", "user-modify-playback-state", "user-read-recently-played"};
 
 	public static void spotifyLogin(Activity activity) {
 		AuthenticationRequest request = new AuthenticationRequest.Builder(activity.getString(R.string.client_id), AuthenticationResponse.Type.TOKEN, buildUri(activity)).setScopes(scopes).build();
