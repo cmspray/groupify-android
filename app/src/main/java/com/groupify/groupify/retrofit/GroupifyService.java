@@ -3,12 +3,26 @@ package com.groupify.groupify.retrofit;
 import com.groupify.groupify.dto.AlbumList;
 import com.groupify.groupify.dto.UserResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface GroupifyService {
+
+	//USERS
+	@FormUrlEncoded
+	@POST("user")
+	Call<ResponseBody> postUser(@Field("username") String username,
+								@Field("displayName") String displayName,
+								@Field("email") String email,
+								@Field("spotifyUrl") String spotifyUrl,
+								@Field("spotifyUri") String spotifyUri,
+								@Field("spotifyId") String spotifyId);
 
 	@GET("user/me")
 	Call<UserResponse> getUserInfo(@Header("Authorization") String authToken);
