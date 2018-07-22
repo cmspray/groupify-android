@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import android.view.View
 import com.groupify.groupify.onboarding.OnBoardingActivity
 
 class SplashScreenActivity : AppCompatActivity(), SpotifySessionHelper.LoginFinishedCallback {
@@ -13,6 +14,7 @@ class SplashScreenActivity : AppCompatActivity(), SpotifySessionHelper.LoginFini
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen)
         PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.spotify_token_pref), null)?.let {
             Log.e("Token", it)

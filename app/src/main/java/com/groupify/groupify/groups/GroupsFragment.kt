@@ -25,6 +25,7 @@ import com.spotify.sdk.android.player.PlayerEvent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class GroupsFragment : Fragment(), Callback<AllGroupsResponse> {
 
@@ -40,7 +41,7 @@ class GroupsFragment : Fragment(), Callback<AllGroupsResponse> {
         override fun onLoggedIn() {
             if(HomeActivity.playListId != null) {
                 Log.e("Logged In", "Logged in")
-                SpotifyHelper.player?.playUri(null, "spotify:playlist:" + HomeActivity.playListId, 0, 0)
+                SpotifyHelper.player?.playUri(null, "spotify:playlist:" + HomeActivity.playListId, Random(System.currentTimeMillis()).nextInt() % 5, 0)
             }
         }
 

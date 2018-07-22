@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.spotify.sdk.android.player.Config;
 import com.spotify.sdk.android.player.ConnectionStateCallback;
+import com.spotify.sdk.android.player.Error;
 import com.spotify.sdk.android.player.Player;
 import com.spotify.sdk.android.player.Spotify;
 import com.spotify.sdk.android.player.SpotifyPlayer;
@@ -28,6 +29,17 @@ public class SpotifyHelper {
 			public void onInitialized(SpotifyPlayer spotifyPlayer) {
 				spotifyPlayer.addConnectionStateCallback(connectionCallback);
 				spotifyPlayer.addNotificationCallback(notificationCallback);
+				spotifyPlayer.setShuffle(new Player.OperationCallback() {
+					@Override
+					public void onSuccess() {
+
+					}
+
+					@Override
+					public void onError(Error error) {
+
+					}
+				}, true);
 			}
 
 			@Override

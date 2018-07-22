@@ -2,23 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLight">
+    android:paddingBottom="16dp"
+    android:paddingEnd="16dp"
+    android:background="@color/colorLightest"
+    android:paddingStart="16dp">
 
     <Button
         android:id="@+id/got_it_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/button_drawable"
+        android:gravity="center"
         android:paddingBottom="16dp"
-        android:text="Got it!" />
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:text="Get Started!"
+        android:textColor="@android:color/white" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/onboarding_view_pager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         android:layout_above="@id/got_it_button"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:elevation="4dp">
 
     </android.support.v4.view.ViewPager>
 

@@ -114,15 +114,16 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
     private fun goToProfile() = startActivity(Intent(this, ProfileActivity::class.java))
 
     private fun stopSong() {
+        SpotifyHelper.player.pause(object : Player.OperationCallback {
+            override fun onSuccess() {
+            }
+
+            override fun onError(p0: Error?) {
+            }
+
+        })
         if(HomeActivity.playListId != null) {
-            SpotifyHelper.player.pause(object : Player.OperationCallback {
-                override fun onSuccess() {
-                }
 
-                override fun onError(p0: Error?) {
-                }
-
-            })
         } else {
             HomeActivity.playListId = null
         }

@@ -17,6 +17,7 @@ import com.groupify.groupify.SpotifyHelper
 import com.groupify.groupify.dto.Group
 import com.spotify.sdk.android.player.ConnectionStateCallback
 import com.spotify.sdk.android.player.Player
+import java.util.*
 
 class GroupListAdapter(val groupClickCallback: GroupClickCallback, context: Context,
                        val clipboardManager: ClipboardManager,
@@ -36,7 +37,7 @@ class GroupListAdapter(val groupClickCallback: GroupClickCallback, context: Cont
                 itemView.setOnClickListener {
                     val group = groups!![holder.adapterPosition]
                     if(SpotifyHelper.player.isLoggedIn) {
-                        SpotifyHelper.player.playUri(null, "spotify:playlist:" + group.playlistId, 0, 0)
+                        SpotifyHelper.player.playUri(null, "spotify:playlist:" + group.playlistId, Random(System.currentTimeMillis()).nextInt() % 5, 0)
                     } else {
                         Log.e("Not Logged in", "Not logged in")
                         groupClickCallback.playingId(group.playlistId)
