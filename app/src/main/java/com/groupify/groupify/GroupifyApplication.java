@@ -20,7 +20,7 @@ public class GroupifyApplication extends Application {
 		public void onResponse(@NonNull Call<UserResponse> call, Response<UserResponse> response) {
 			GroupifyUser groupifyUser = new GroupifyUser(response.body().getUser());
 			RetrofitHelper.postUser(GroupifyApplication.this, groupifyUser, createUserCallback);
-			Log.e("Spotify ID", groupifyUser.getSpotifyId());
+			Log.e("spotify_2 ID", groupifyUser.getSpotifyId());
 			PreferenceHelper.Companion.saveSpotifyUserId(GroupifyApplication.this, groupifyUser.getSpotifyId());
 		}
 

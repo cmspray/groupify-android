@@ -8,6 +8,7 @@ import android.text.TextUtils.replace
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.groupify.groupify.groupdetails.GroupDetailsFragment
 import com.groupify.groupify.groups.GroupListAdapter
 import com.groupify.groupify.groups.GroupsFragment
@@ -19,33 +20,10 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.my_toolbar))
         showGroupList(supportFragmentManager.beginTransaction().addToBackStack("list"))
+
+        val profileImage: ImageView = findViewById(R.id.action_profile)
+        profileImage.setOnClickListener { goToProfile() }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.android, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean =
-            when (item.itemId) {
-                R.id.action_settings -> {
-                    goToSettings()
-                    true
-                }
-                R.id.action_profile -> {
-                    goToProfile()
-                    true
-                }
-                android.R.id.home -> {
-                    onBackPressed()
-                    true
-                }
-                else -> {
-                    super.onOptionsItemSelected(item)
-                }
-            }
-
 
     override fun groupClicked(groupId: Int, playlistId: String, groupName: String) {
         supportFragmentManager.beginTransaction().addToBackStack("detail").
@@ -68,7 +46,6 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
         ft.replace(R.id.home_container, GroupsFragment()).commit()
     }
 
-    private fun goToSettings() = startActivity(Intent(this,SettingsActivity::class.java))
     private fun goToProfile() = startActivity(Intent(this,ProfileActivity::class.java))
 
 }
