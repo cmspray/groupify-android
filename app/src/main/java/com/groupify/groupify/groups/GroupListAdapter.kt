@@ -1,14 +1,25 @@
 package com.groupify.groupify.groups
 
+import android.app.PendingIntent.getActivity
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.groupify.groupify.R
+import com.groupify.groupify.SpotifyHelper
 import com.groupify.groupify.dto.Group
+import com.spotify.sdk.android.player.ConnectionStateCallback
+import com.spotify.sdk.android.player.Player
 
-class GroupListAdapter(val groupClickCallback: GroupClickCallback) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GroupListAdapter(val groupClickCallback: GroupClickCallback, context: Context,
+                       val clipboardManager: ClipboardManager,
+                       val connectionStateCallback: ConnectionStateCallback,
+                       val notificationCallback: Player.NotificationCallback,
+                       val spotifyHelper: SpotifyHelper = SpotifyHelper().apply { initConfig(context, connectionStateCallback, notificationCallback) }) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val TYPE_GROUP = 0
     val TYPE_NONE = 1
@@ -21,7 +32,13 @@ class GroupListAdapter(val groupClickCallback: GroupClickCallback) : RecyclerVie
                 nameView.text = groups!![holder.adapterPosition].name
                 itemView.setOnClickListener {
                     val group = groups!![holder.adapterPosition]
-                    groupClickCallback.groupClicked(group.id, group.name, group.playlistId)
+                    spotifyHelper.player.playUri(null, group.playlistId, 0, 0)
+                }
+                itemView.setOnLongClickListener {
+                    val group = groups!![holder.adapterPosition]
+                    val clip: ClipData = ClipData.newPlainText("label", String.format("groupify://group/%d", group.id))
+                    clipboardManager.primaryClip = clip
+                    true
                 }
             }
         }

@@ -35,6 +35,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+
 public class ProfileActivity extends AppCompatActivity implements Callback<UserResponse> {
 
     private TextView displayName;
@@ -48,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setContentView(R.layout.activity_profile);
         setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
         getSupportActionBar().setDisplayShowTitleEnabled(false);

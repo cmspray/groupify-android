@@ -6,30 +6,28 @@
     <ImageView
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="220dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:src="@drawable/header_pair_image" />
 
     <ImageView
         android:id="@+id/home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:adjustViewBounds="true"
-        android:maxWidth="50dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
         android:src="@drawable/groupify_icon_white" />
 
     <ImageView
         android:id="@+id/action_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
         android:adjustViewBounds="true"
-        android:maxWidth="50dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
         android:src="@drawable/ic_person_outline_black_24dp" />
 
     <FrameLayout

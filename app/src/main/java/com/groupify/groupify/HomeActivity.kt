@@ -12,6 +12,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.groupify.groupify.dto.Group
@@ -29,8 +31,8 @@ class HomeActivity : AppCompatActivity(), GroupListAdapter.GroupClickCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN, SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.my_toolbar))
 
         val lastPathSegment = intent.data?.lastPathSegment
         if (null != lastPathSegment) {

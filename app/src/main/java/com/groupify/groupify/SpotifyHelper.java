@@ -14,10 +14,13 @@ public class SpotifyHelper {
 	private Config playerConfig;
 	private SpotifyPlayer player;
 
-	public void init(Context context, final ConnectionStateCallback connectionCallback, final Player.NotificationCallback notificationCallback) {
+	public void initConfig(Context context, final ConnectionStateCallback connectionCallback, final Player.NotificationCallback notificationCallback) {
 		playerConfig = new Config(context, PreferenceManager.getDefaultSharedPreferences(context).getString(context.getString(R.string.spotify_token_pref), ""), context.getString(R.string.client_id));
-		Spotify.getPlayer(playerConfig, this, new SpotifyPlayer.InitializationObserver() {
+		initPlayer(connectionCallback, notificationCallback);
+	}
 
+	public void initPlayer(final ConnectionStateCallback connectionCallback, final Player.NotificationCallback notificationCallback) {
+		player  = Spotify.getPlayer(playerConfig, this, new SpotifyPlayer.InitializationObserver() {
 			@Override
 			public void onInitialized(SpotifyPlayer spotifyPlayer) {
 				player.addConnectionStateCallback(connectionCallback);

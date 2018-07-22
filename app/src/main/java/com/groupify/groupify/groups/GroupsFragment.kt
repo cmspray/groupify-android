@@ -1,5 +1,7 @@
 package com.groupify.groupify.groups
 
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
@@ -14,6 +16,10 @@ import android.widget.TextView
 import com.groupify.groupify.R
 import com.groupify.groupify.dto.AllGroupsResponse
 import com.groupify.groupify.retrofit.RetrofitHelper
+import com.spotify.sdk.android.player.ConnectionStateCallback
+import com.spotify.sdk.android.player.Error
+import com.spotify.sdk.android.player.Player
+import com.spotify.sdk.android.player.PlayerEvent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +30,34 @@ class GroupsFragment : Fragment(), Callback<AllGroupsResponse> {
     lateinit var groupListRV: RecyclerView
     lateinit var addGroupButton: FloatingActionButton
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
+    val connectionStateCallback: ConnectionStateCallback = object: ConnectionStateCallback {
+        override fun onLoggedOut() {
+        }
+
+        override fun onLoggedIn() {
+        }
+
+        override fun onConnectionMessage(p0: String?) {
+        }
+
+        override fun onLoginFailed(p0: Error?) {
+        }
+
+        override fun onTemporaryError() {
+        }
+
+    }
+
+    val notificationCallback: Player.NotificationCallback = object : Player.NotificationCallback {
+        override fun onPlaybackError(p0: Error?) {
+
+        }
+
+        override fun onPlaybackEvent(p0: PlayerEvent?) {
+        }
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_groups, container, false).apply {
@@ -38,7 +72,7 @@ class GroupsFragment : Fragment(), Callback<AllGroupsResponse> {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        groupListAdapter = GroupListAdapter(activity as GroupListAdapter.GroupClickCallback)
+        groupListAdapter = GroupListAdapter(activity as GroupListAdapter.GroupClickCallback, activity!!, activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager, connectionStateCallback, notificationCallback)
         groupListRV.layoutManager = LinearLayoutManager(activity)
         swipeRefreshLayout.isRefreshing = true
         groupListRV.adapter = groupListAdapter

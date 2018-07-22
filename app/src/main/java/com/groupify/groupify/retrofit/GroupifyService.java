@@ -33,7 +33,7 @@ public interface GroupifyService {
 	Call<UserResponse> getUser(@Header("Authorization") String authToken, @Path("spotifyId") String spotifyId);
 
 	@GET("user/me")
-	Call<UserResponse> getUserInfo(@Header("Authorization") String authToken);
+	Call<UserResponse> 	getUserInfo(@Header("Authorization") String authToken);
 
 	@PUT("user/{id}")
 	Call<ResponseBody> putUser(@Header("Authorization") String authToken,@Path("id") int userId, @Body PutUserRequest groupifyUser);
