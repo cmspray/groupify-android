@@ -16,9 +16,11 @@ class GroupListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var groups: List<Group>? = null
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as GroupViewHolder).apply {
-            if (itemViewType == TYPE_GROUP) {
-                nameView.text = groups!![holder.adapterPosition].name
+        if(holder.itemViewType == TYPE_GROUP) {
+            (holder as GroupViewHolder).apply {
+                if (itemViewType == TYPE_GROUP) {
+                    nameView.text = groups!![holder.adapterPosition].name
+                }
             }
         }
     }
@@ -28,7 +30,7 @@ class GroupListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             GroupViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.group_list_item_view, parent, false))
         }
         else -> {
-            GroupViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.group_list_empty_item_view, parent, false))
+            NoGroupViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.group_list_empty_item_view, parent, false))
         }
     }
 
@@ -49,4 +51,5 @@ class GroupListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class GroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameView: TextView = itemView.findViewById(R.id.group_name)
     }
+    inner class NoGroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
