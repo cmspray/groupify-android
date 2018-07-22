@@ -26,11 +26,16 @@ class HomeActivity : AppCompatActivity() {
                     goToSettings()
                     true
                 }
+                R.id.action_profile -> {
+                    goToProfile()
+                    true
+                }
                 else -> {
                     super.onOptionsItemSelected(item)
                 }
             }
 
     private fun goToSettings() = startActivity(Intent(this,SettingsActivity::class.java))
+    private fun goToProfile() = startActivity(Intent(this,ProfileActivity::class.java))
 
 }

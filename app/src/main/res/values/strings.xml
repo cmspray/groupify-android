@@ -5,6 +5,6 @@
     <string name="groupify_on_auth_path">onAuth</string>
     <string name="spotify_token_pref">SPOTIFY_TOKEN</string>
     <string name="action_settings">Settings</string>
-    <string name="action_groups">Groups</string>
+    <string name="action_profile">Profile</string>
     <string name="spotify_user_id_pref">SPOTIFY_USER_ID</string>
 </resources>

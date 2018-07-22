@@ -4,14 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <item android:id="@+id/action_groups"
-        android:icon="@drawable/ic_add_box_black_24dp"
-        android:title="@string/action_groups"
+    <item android:id="@+id/action_profile"
+        android:title="@string/action_profile"
         app:showAsAction="never"/>
 
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:icon="@drawable/ic_dehaze_black_24dp"
         app:showAsAction="never"/>
 
 </menu>
