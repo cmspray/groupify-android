@@ -8,6 +8,7 @@ import com.groupify.groupify.PreferenceHelper;
 import com.groupify.groupify.dto.AlbumList;
 import com.groupify.groupify.dto.AllGroupsResponse;
 import com.groupify.groupify.dto.CreateUserResponse;
+import com.groupify.groupify.dto.Group;
 import com.groupify.groupify.dto.GroupRequest;
 import com.groupify.groupify.dto.GroupifyUser;
 import com.groupify.groupify.dto.UserResponse;
@@ -61,5 +62,9 @@ public final class RetrofitHelper {
 
 	public static void getGroups(Context context, Callback<AllGroupsResponse> groups) {
 		groupifyService.getAllGroups(PreferenceHelper.Companion.getAuth(context)).enqueue(groups);
+	}
+
+	public static void getGroupById(Context context, int groupId, Callback<Group> callback) {
+		groupifyService.getGroupById(PreferenceHelper.Companion.getAuth(context), groupId).enqueue(callback);
 	}
 }

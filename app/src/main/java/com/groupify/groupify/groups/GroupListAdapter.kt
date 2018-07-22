@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.groupify.groupify.R
 import com.groupify.groupify.dto.Group
 
-class GroupListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GroupListAdapter(val groupClickCallback: GroupClickCallback) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val TYPE_GROUP = 0
     val TYPE_NONE = 1
@@ -16,10 +16,12 @@ class GroupListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var groups: List<Group>? = null
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder.itemViewType == TYPE_GROUP) {
+        if (holder.itemViewType == TYPE_GROUP) {
             (holder as GroupViewHolder).apply {
-                if (itemViewType == TYPE_GROUP) {
-                    nameView.text = groups!![holder.adapterPosition].name
+                nameView.text = groups!![holder.adapterPosition].name
+                itemView.setOnClickListener {
+                    val group = groups!![holder.adapterPosition]
+                    groupClickCallback.groupClicked(group.id, group.name, group.playlistId)
                 }
             }
         }
@@ -51,5 +53,10 @@ class GroupListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class GroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameView: TextView = itemView.findViewById(R.id.group_name)
     }
+
     inner class NoGroupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    interface GroupClickCallback {
+        fun groupClicked(groupId: Int, playlistId: String, groupName: String)
+    }
 }

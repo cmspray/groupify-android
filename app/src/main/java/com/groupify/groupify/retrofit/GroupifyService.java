@@ -32,8 +32,8 @@ public interface GroupifyService {
 	@GET("group")
 	Call<AllGroupsResponse> getAllGroups(@Header("Authorization") String authToken);
 
-	@GET("group/user/{id}")
-	Call<AllGroupsResponse> getGroupsForUser(@Path("id") String userId);
+	@GET("group/{id}")
+	Call<Group> getGroupById(@Header("Authorization") String authToken, @Path("id") int groupId);
 
 	@GET("group")
 	Call<Group> getGroup();

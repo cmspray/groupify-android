@@ -12,4 +12,5 @@
     <string name="cancel">Cancel</string>
     <string name="input_group_name">Insert Group Name Here</string>
     <string name="spotify_onboard_pref">SEEN_ONBOARDING</string>
+    <string name="group_details">Group Details</string>
 </resources>

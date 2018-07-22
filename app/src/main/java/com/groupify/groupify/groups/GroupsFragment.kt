@@ -20,7 +20,7 @@ import retrofit2.Response
 
 class GroupsFragment : Fragment(), Callback<AllGroupsResponse> {
 
-    val groupListAdapter: GroupListAdapter = GroupListAdapter()
+    lateinit var groupListAdapter: GroupListAdapter
     lateinit var groupListRV: RecyclerView
     lateinit var addGroupButton: FloatingActionButton
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -38,6 +38,7 @@ class GroupsFragment : Fragment(), Callback<AllGroupsResponse> {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        groupListAdapter = GroupListAdapter(activity as GroupListAdapter.GroupClickCallback)
         groupListRV.layoutManager = LinearLayoutManager(activity)
         swipeRefreshLayout.isRefreshing = true
         groupListRV.adapter = groupListAdapter
