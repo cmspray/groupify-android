@@ -40,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         setSupportActionBar((Toolbar) findViewById(R.id.my_toolbar));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         displayName = findViewById(R.id.user_display_name);
         email = findViewById(R.id.user_email);
@@ -87,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
             }catch(Exception e){
                 e.printStackTrace();
             }
-//            logo = transform(logo);
+            logo = transform(logo);
             return logo;
         }
         protected void onPostExecute(Bitmap result){
@@ -102,7 +103,7 @@ public class ProfileActivity extends AppCompatActivity implements Callback<UserR
             final Paint paint = new Paint();
             final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
             final RectF rectF = new RectF(rect);
-            final float roundPx = 12;
+            final float roundPx = 100;
 
             paint.setAntiAlias(true);
             canvas.drawARGB(0, 0, 0, 0);
