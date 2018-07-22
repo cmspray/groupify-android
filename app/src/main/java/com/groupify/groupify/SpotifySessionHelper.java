@@ -5,13 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.groupify.groupify.dto.GroupifyUser;
 import com.groupify.groupify.dto.UserResponse;
 import com.groupify.groupify.retrofit.RetrofitHelper;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,10 +25,24 @@ public class SpotifySessionHelper {
 	public static final int REQUEST_CODE = 12415;
 
 	private static final String[] scopes = new String[]{"streaming", "user-library-read", "user-read-email", "user-read-private"};
+
+	private static final Callback<ResponseBody> userPostCallback = new Callback<ResponseBody>() {
+		@Override
+		public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+		}
+
+		@Override
+		public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+		}
+	};
+
 	private static final Callback<UserResponse> userInfoCallback = new Callback<UserResponse>() {
 		@Override
-		public void onResponse(Call<UserResponse> all, Response<UserResponse> response) {
-			//todo post user info
+		public void onResponse(@NonNull Call<UserResponse> all, @NonNull Response<UserResponse> response) {
+			GroupifyUser groupifyUser = new GroupifyUser(response.body().getUser());
+			RetrofitHelper.postUser(groupifyUser, userPostCallback);
 		}
 
 		@Override
