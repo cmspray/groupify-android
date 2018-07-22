@@ -17,11 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity">
+        <activity android:name=".HomeActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <data
                     android:host="@string/groupify_on_auth_path"
                     android:scheme="@string/groupify_on_auth_host" />
+
+                <data android:host="group"
+                    android:scheme="groupify"/>
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />

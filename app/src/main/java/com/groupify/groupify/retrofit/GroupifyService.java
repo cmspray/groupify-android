@@ -1,5 +1,6 @@
 package com.groupify.groupify.retrofit;
 
+import com.groupify.groupify.dto.AddToGroupRequest;
 import com.groupify.groupify.dto.AlbumList;
 import com.groupify.groupify.dto.AllGroupsResponse;
 import com.groupify.groupify.dto.CreateUserResponse;
@@ -33,7 +34,10 @@ public interface GroupifyService {
 	Call<AllGroupsResponse> getAllGroups(@Header("Authorization") String authToken);
 
 	@GET("group/{id}")
-	Call<Group> getGroupById(@Header("Authorization") String authToken, @Path("id") int groupId);
+	Call<Group> getGroupById(@Header("Authorization") String authToken, @Path("id") String groupId);
+
+	@POST("group/{id}/member")
+	Call<ResponseBody> addUserToGroup(@Header("Authorization") String authToken, @Path("id") String groupId, @Body AddToGroupRequest addToGroupRequest);
 
 	@GET("group")
 	Call<Group> getGroup();
@@ -55,7 +59,7 @@ public interface GroupifyService {
 	Call<AlbumList> getAlbumsWithLimitAndOffset(@Header("Authorization") String authToken, @Query("limit") int limit, @Query("offset") int offset);
 
 	//PLAYLISTS
-	@GET("playlists/{playlistId}/user/{userId}")
+	@GET("playlist/{playlistId}/user/{userId}")
 	Call<ResponseBody> getPlaylistById(@Header("Authorization") String authToken, @Path("playlistId") String playlistId,  @Path("userId") String userId);
 
 }

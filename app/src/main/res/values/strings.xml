@@ -13,4 +13,6 @@
     <string name="input_group_name">Insert Group Name Here</string>
     <string name="spotify_onboard_pref">SEEN_ONBOARDING</string>
     <string name="group_details">Group Details</string>
+    <string name="make_friends">Make friends</string>
+    <string name="share_message">Would you lke to join %s?</string>
 </resources>

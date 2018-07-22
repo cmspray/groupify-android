@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.groupify.groupify.PreferenceHelper;
+import com.groupify.groupify.dto.AddToGroupRequest;
 import com.groupify.groupify.dto.AlbumList;
 import com.groupify.groupify.dto.AllGroupsResponse;
 import com.groupify.groupify.dto.CreateUserResponse;
@@ -50,12 +51,10 @@ public final class RetrofitHelper {
 		groupifyService.createGroup(PreferenceHelper.Companion.getAuth(context), new GroupRequest(groupName, PreferenceHelper.Companion.getSpotifyUserId(context), PreferenceHelper.Companion.getUserId(context))).enqueue(new Callback<ResponseBody>() {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-				Log.e("Add Group Response", "" + response.isSuccessful());
 			}
 
 			@Override
 			public void onFailure(Call<ResponseBody> call, Throwable t) {
-				Log.e("Add Group fail", "" + t.getMessage());
 			}
 		});
 	}
@@ -64,11 +63,15 @@ public final class RetrofitHelper {
 		groupifyService.getAllGroups(PreferenceHelper.Companion.getAuth(context)).enqueue(groups);
 	}
 
-	public static void getGroupById(Context context, int groupId, Callback<Group> callback) {
+	public static void getGroupById(Context context, String groupId, Callback<Group> callback) {
 		groupifyService.getGroupById(PreferenceHelper.Companion.getAuth(context), groupId).enqueue(callback);
 	}
 
 	public static void getPlaylist(Context context, String playlistId, Callback<ResponseBody> callback) {
 		groupifyService.getPlaylistById(PreferenceHelper.Companion.getAuth(context), playlistId, PreferenceHelper.Companion.getSpotifyUserId(context)).enqueue(callback);
+	}
+
+	public static void addUserToGroup(Context context, String groupId, Callback<ResponseBody> callback) {
+		groupifyService.addUserToGroup(PreferenceHelper.Companion.getAuth(context), groupId, new AddToGroupRequest(PreferenceHelper.Companion.getUserId(context))).enqueue(callback);
 	}
 }
