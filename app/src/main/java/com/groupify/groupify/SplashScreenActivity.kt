@@ -1,7 +1,6 @@
 package com.groupify.groupify
 
 import android.content.Intent
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -16,7 +15,7 @@ class SplashScreenActivity : AppCompatActivity(), SpotifySessionHelper.LoginFini
         setContentView(R.layout.activity_splash_screen)
         PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.spotify_token_pref), null)?.let {
             Log.e("Token", it)
-            Log.e("Id", PreferenceHelper.getUserId(this))
+            Log.e("Id", PreferenceHelper.getSpotifyUserId(this))
             goHome()
         } ?: SpotifySessionHelper.spotifyLogin(this)
 

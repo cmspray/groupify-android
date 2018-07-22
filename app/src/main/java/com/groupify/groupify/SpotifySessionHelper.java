@@ -74,7 +74,7 @@ public class SpotifySessionHelper {
 			GroupifyUser groupifyUser = new GroupifyUser(response.body().getUser());
 			RetrofitHelper.postUser(groupifyUser, userPostCallback);
 			Log.e("User ID", groupifyUser.getSpotifyId());
-			PreferenceHelper.Companion.saveUserId(context, groupifyUser.getSpotifyId());
+			PreferenceHelper.Companion.saveSpotifyUserId(context, groupifyUser.getSpotifyId());
 		}
 
 		@Override

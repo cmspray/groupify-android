@@ -3,10 +3,12 @@ package com.groupify.groupify.retrofit;
 import com.groupify.groupify.dto.AlbumList;
 import com.groupify.groupify.dto.AllGroupsResponse;
 import com.groupify.groupify.dto.Group;
+import com.groupify.groupify.dto.GroupRequest;
 import com.groupify.groupify.dto.UserResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -37,9 +39,8 @@ public interface GroupifyService {
 	@GET("group")
 	Call<Group> getGroup();
 
-	@FormUrlEncoded
 	@POST("group")
-	Call<ResponseBody> createGroup(@Field("name") String groupName, @Field("user_id") String userId);
+	Call<ResponseBody> createGroup(@Body GroupRequest groupRequest);
 
 	//ALBUMS
 	@GET("library/albums")
